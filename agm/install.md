@@ -15,10 +15,9 @@ To deploy the AGM OVA without the AGM Catalog feature enabled, use VMware vSpher
 - One(1) virtual network interface card (vNIC)
 - A static (and unique) IPv4 address***
 
-`
-*Both the virtual CPU and virtual RAM allocation should be reserved.  
-** Avoid sharing the datastore space with production load.  
-`
+`*Both the virtual CPU and virtual RAM allocation should be reserved.`    
+`** Avoid sharing the datastore space with production load.`  
+
 
 ##### AGM With Catalog Enabled
 To deploy the AGM OVA with AGM’s Catalog feature enabled, use the VMware vSphere 6.5, 6.0, 5.5 or 5.1 Web Client with the following system requirements:

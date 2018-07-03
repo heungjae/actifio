@@ -16,8 +16,8 @@ To deploy the AGM OVA without the AGM Catalog feature enabled, use VMware vSpher
 - A static (and unique) IPv4 address***
 
 `
-*Both the virtual CPU and virtual RAM allocation should be reserved.
-** Avoid sharing the datastore space with production load.
+*Both the virtual CPU and virtual RAM allocation should be reserved.  
+** Avoid sharing the datastore space with production load.  
 `
 
 ##### AGM With Catalog Enabled

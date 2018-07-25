@@ -30,3 +30,15 @@ An Actifio Sky VM must be installed on a VMware vSphere server configured specif
 - optional SSD - 103GB
 
 Also, when creating disks on ESX, ensure that the Mode is set to Independent and Persistent.
+
+#### Object Storage Support
+- Amazon S3, S3-IAS
+- Google Nearline, Coldline
+- IBM Cloud Object Storage (Cleversafe)
+- Microsoft Azure-BLOB
+- Scality Object Storage
+- Hitachi Content Platform
+- EMC ECS Obect Store
+- Wasabi Object Store
+- Cloudian Hyperstore
+- Western Digital ActiveScale

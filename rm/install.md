@@ -5,8 +5,6 @@ Actifio Report Manager (RM) is a web based reporting service that enables you to
 #### RM VM Requirements
 To deploy the RM OVA, use VMware vSphere 6.5, 6.0, 5.5 or 5.1 Web Client with the following minimum system requirements:
 
-##### RM
-
 Following are the minimum system requirements for Actifio Report Manager deployment:
 - 2 virtual CPUs*
 - 8 GB of memory

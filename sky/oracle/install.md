@@ -31,12 +31,12 @@ The listener process must be up and running:
 
 ##### ASM diskstring
 
-If you are using Oracle ASM protection out-of-band, then check that the ASM diskstring parameter is not null. Log into the database server as ASM OS user and set the ASM environment variable:
+If you are using Oracle ASM protection out-of-band, then check that the ASM diskstring parameter is not null. Log into the ASM instance on the database server as ASM OS user and set the ASM environment variable:
 ```
 sqlplus / as sysasm
 show parameter asm_diskstring
 ```
-If the result of value is null, then get the correct ASM disk string value for existing ASM disks before proceeding with Actifio protection. The Actifio backup will add its diskstring path (/dev/actifio/asm/*) for its backup staging disk to map to ASM.
+If the result of value is null, then get the correct ASM disk string value for existing ASM disks before proceeding with Actifio protection. The Actifio backup will add its diskstring path (/dev/actifio/asm/*) for its backup staging disk to map to ASM. Add `ORCL:*` to asm_diskstring using the `alter system set asm_diskstring='ORCL:*' ;` command.
 
 
 ##### Find out the running instance and environment variables

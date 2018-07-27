@@ -175,10 +175,15 @@ sqlplus act_rman_user/act_rman_user@<service_name> as sysdba
 - - -
 
 ```
+# touch /act/scripts/wf_mdb_pre.sh
+# touch /act/scripts/wf_mdb_post.sh
 # touch /act/scripts/wf_xdb_pre.sh
 # touch /act/scripts/wf_xdb_post.sh
+# touch /act/scripts/wf_vdb_pre.sh
+# touch /act/scripts/wf_vdb_post.sh
 # touch /act/scripts/wf_db_post.sh
 # touch /act/scripts/wf_db_pre.sh
+
 # chown oracle:oinstall /act/scripts/*.sh
 # chmod 755 /act/scripts/*.sh
 ```

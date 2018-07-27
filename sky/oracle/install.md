@@ -84,6 +84,15 @@ RMAN> configure snapshot controlfile name to ‘+<DG name><DB name>’
 
 ##### spfile
 
+The location of text pfile is in $ORACLE_HOME/dbs/init{ORACLE_SID}.ora , whereas the encoded binary file is spfile{ORACLE_SID}.ora. To create a pfile from spfile, use the `create pfile from spfile`
+
+To create an spfile 
+```
+startup mount   <-- will use the pfile
+create spfile=’+DATA/ORCL/spfileorcl.ora’ from pfile;
+```
+Replace the following line in initorcl.ora `spfile=’+DATA/ORCL/spfileorcl.ora’`
+
 Verify database is running with spfile: 
 ```
 sqlplus / as sysdba

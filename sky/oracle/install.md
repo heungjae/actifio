@@ -49,6 +49,13 @@ export ORACLE_SID=<database instance name>
 export PATH=$ORACLE_HOME/bin:$PATH
 ```
 
+If you need to script the setting of environment variables:
+```
+export ORACLE_SID=$oracleSID
+export ORAENV_ASK=NO
+. /usr/local/bin/oraenv
+```
+
 Find out if ASM is running on the host:
 `ps –ef | grep asm_pmon`
 

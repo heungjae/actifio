@@ -91,7 +91,12 @@ To create an spfile
 startup mount   <-- will use the pfile
 create spfile=’+DATA/ORCL/spfileorcl.ora’ from pfile;
 ```
-Replace the following line in initorcl.ora `spfile=’+DATA/ORCL/spfileorcl.ora’`
+Replace or insert the following line in initorcl.ora `spfile=’+DATA/ORCL/spfileorcl.ora’`
+
+```
+$ cat initdemo.ora 
+SPFILE='+DATA/demo/spfiledemo.ora'
+```
 
 Verify database is running with spfile: 
 ```

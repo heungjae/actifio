@@ -21,7 +21,9 @@ $ ./opatch lsinventory -details
 Each Oracle database to be protected must be up and running: 
 `ps –ef | grep pmon`
 
-The Oracle database SID entry must be in the **/etc/oratab** (or, /var/opt/oracle/oratab) file. For a database named “prod”, the entry looks like: 
+The Oracle database SID entry must be in the **/etc/oratab** (or, /var/opt/oracle/oratab) file.   
+
+For a database named “prod”, the entry looks like: 
 `prod:/home/oracle/app/oracle/product/11.1.0/db_1:Y`
 
 The listener process must be up and running: 

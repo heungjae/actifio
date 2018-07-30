@@ -168,6 +168,10 @@ SQL> alter database archivelog;
 SQL> alter database open;
 ```
 
+Verify the Database in flash back mode and the retention_target:
+`SELECT flashback_on, log_mode FROM v$database;`
+
+
 ### DATABASE AUTHENTICATION, as opposed to OS AUTHENTICATION
 Create a database user account for Actifio backup (if not provided):
 `create user act_rman_user identified by <password>; `

@@ -42,7 +42,7 @@ For a database named “prod”, the entry looks like:
 
 #### Preparing for protection
 
-##### ASM diskstring
+##### Ensure ASM diskstring is not NULL
 
 If you are using Oracle ASM protection out-of-band, then check that the ASM diskstring parameter is not null. Log into the ASM instance on the database server as ASM OS user and set the ASM environment variable:
 ```

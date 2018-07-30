@@ -46,10 +46,8 @@ If the result of value is null, then get the correct ASM disk string value for e
 ##### Find out the running instance and environment variables
 Log into the database server as Oracle OS user and set the database environment variable:
 ```
-export ORACLE_HOME=<oracle home path> 
-(get this from /etc/oratab or /var/opt/oracle/oratab on Solaris systems)
-export ORACLE_SID=<database instance name> 
-(you can get this through ps ‐ef | grep pmon)
+export ORACLE_HOME=<oracle home path>        (get this from /etc/oratab or /var/opt/oracle/oratab on Solaris systems)
+export ORACLE_SID=<database instance name>   (you can get this through ps ‐ef | grep pmon)
 export PATH=$ORACLE_HOME/bin:$PATH
 ```
 
@@ -85,8 +83,7 @@ RMAN> show all
 RMAN> configure snapshot controlfile name to ‘+<DG name><DB name>’
 ```
 
-
-##### spfile
+##### Ensure the database is using SPFILE
 
 The location of text pfile is in $ORACLE_HOME/dbs/init{ORACLE_SID}.ora , whereas the encoded binary file is spfile{ORACLE_SID}.ora. To create a pfile from spfile, use the `create pfile from spfile`
 

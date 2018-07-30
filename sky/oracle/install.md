@@ -38,6 +38,32 @@ show parameter asm_diskstring
 ```
 If the result of value is null, then get the correct ASM disk string value for existing ASM disks before proceeding with Actifio protection. The Actifio backup will add its diskstring path (/dev/actifio/asm/*) for its backup staging disk to map to ASM. Add `ORCL:*` to asm_diskstring using the `alter system set asm_diskstring='ORCL:*' ;` command.
 
+```
+set lines 120
+col name for a30
+col path for a30
+col state for a30
+select name,path from v$asm_disk;
+select group_number,name,state,type from v$asm_diskgroup;
+alter system set asm_diskstring='ORCL:*' ;
+
+col compatibility format a10
+col database_compatibility format a10
+col name format a15
+set linesize 200
+col total_gb format 99099.99
+col free_gb format 99099.99
+select group_number, name, type, total_mb, total_mb/1024 total_gb, free_mb, free_mb/1024 free_gb, compatibility, database_compatibility from v$asm_diskgroup;
+
+. oraenv
++ASM
+sqlplus / as sysasm
+shutdown immediate
+alter system set asm_diskstring=NULL scope=spfile;
+alter system set asm_diskstring='ORCL:*','/dev/actifio/asm/*' scope=spfile;
+alter system set asm_diskstring='ORCL:*','/dev/actifio/asm/*' scope=both;
+startup
+```
 
 ##### Find out the running instance and environment variables
 Log into the database server as Oracle OS user and set the database environment variable:

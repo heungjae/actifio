@@ -21,11 +21,13 @@ $ ./opatch lsinventory -details
 Each Oracle database to be protected must be up and running: 
 `ps –ef | grep pmon`
 
-The Oracle database SID entry must be in the /etc/oratab (or, /var/opt/oracle/oratab) file. For a database named “prod”, the entry looks like: 
+The Oracle database SID entry must be in the **/etc/oratab** (or, /var/opt/oracle/oratab) file. For a database named “prod”, the entry looks like: 
 `prod:/home/oracle/app/oracle/product/11.1.0/db_1:Y`
 
 The listener process must be up and running: 
 `ps –ef | grep tns`
+
+lsnrctl status to ensure the listener is running. If it's down, lsnrctl start will read the **$TNS_ADMIN/listener.ora** (under the grid or oracle user) and start the tnslsnr process. 
 
 #### Preparing for protection
 
@@ -154,7 +156,7 @@ tnsping <service_name>
 lnsrctl status
 ```
 
-If it fails, then create a service name entry in tnsnames.ora. The file should be in either one of the directories: $ORACLE_HOME/network/admin or $ASM_HOME/network/admin . The entry should be as follow:
+If it fails, then create a service name entry in **tnsnames.ora** . The file should be in either one of the directories: $ORACLE_HOME/network/admin or $ASM_HOME/network/admin . The entry should be as follow:
 ```
 <service_name> =
 (DESCRIPTION =

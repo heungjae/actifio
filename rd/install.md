@@ -20,3 +20,9 @@ Following are the minimum system requirements for Actifio Report Manager deploym
 - One(1) virtual network interface card (vNIC)
 - A static (and unique) IPv4 address
 
+
+##### VMFS Data store
+CDS and Sky require a VMFS (not NFS) data store to perform a failover or test-failover action. This is because they will present block devices and create raw device mappings (RDMs) into the recovered VMs. ESX can only store the needed RDM mapping files on block devices formatting with VMFS. Note: shared VMFS data stores are needed for dynamic balancing of VM load across the cluster, see best practices section below for additional information.
+
+##### VMware Enterprise & Resource Pools
+RD requires resource pools for ESX host selection during execution of a recovery plan. VMware supports creation of resource pools only with the Enterprise licensed product.

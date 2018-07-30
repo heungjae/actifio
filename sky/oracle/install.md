@@ -304,8 +304,8 @@ sqlplus act_rman_user/act_rman_user@<service_name> as sysdba
 
 ##### Creating a Servicename Entry in tnsnames.ora	
 Create the service name entry in the tnsnames.ora file at $ORACLE_HOME/network/admin or at $GRID_HOME/network/admin by adding the entry: 
+```
 <service_name> = (DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = <IP of the database server>)(PORT = 1521)) (CONNECT_DATA = (SERVER = DEDICATED) (SERVICE_NAME = <service_name>)) )"
-
 ```
 
 Confirm that the TNS entry is working:

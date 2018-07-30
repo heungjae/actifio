@@ -180,6 +180,14 @@ Verify the sysdba role has been granted:
 Check if database block change tracking is enabled: 
 `select * from v$block_change_tracking;`
 
+```
+set lines 120
+col status for a10
+col filename for a30
+col bytes for 999,999
+select status, filename,bytes from v$block_change_tracking;
+```
+
 To enable database block change tracking from sqlplus:  
 
 For an Oracle instance running from ASM disk group:

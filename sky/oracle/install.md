@@ -26,10 +26,6 @@ The Oracle database SID entry must be in the **/etc/oratab** (or, /var/opt/oracl
 For a database named “prod”, the entry looks like: 
 `prod:/home/oracle/app/oracle/product/11.1.0/db_1:Y`
 
-The listener process must be up and running: 
-`ps –ef | grep tns`
-
-lsnrctl status to ensure the listener is running. If it's down, lsnrctl start will read the **$TNS_ADMIN/listener.ora** (under the grid or oracle user) and start the tnslsnr process. 
 
 #### Preparing for protection
 
@@ -160,6 +156,17 @@ Find out the service name (<service_name>). Test the service name by running
 tnsping <service_name>
 lnsrctl status
 ```
+
+The listener process must be up and running: 
+`ps –ef | grep tns`
+
+If the listner is down:
+`su - oracle ; . oraenv ; lsnrctl status`
+
+lsnrctl status to ensure the listener is running. If it's down, lsnrctl start will read the **$TNS_ADMIN/listener.ora** (under the grid or oracle user) and start the tnslsnr process. 
+
+To reload the listener.ora file:
+`lsnrctl start ; lsnrctl reload ; lsnrctl services`
 
 If it fails, then create a service name entry in **tnsnames.ora** . The file should be in either one of the directories: $ORACLE_HOME/network/admin or $ASM_HOME/network/admin . The entry should be as follow:
 ```

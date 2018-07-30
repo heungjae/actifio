@@ -169,13 +169,70 @@ Grant sysdba access.
 grant create session, resource, sysdba to act_rman_user;
 ```
 
+Oracle database authentication uses your Oracle credentials. With Oracle Database Authentication, you must provide two kinds of Oracle credentials:
+- Database credentials to connect to the database with sysdba privilege (sysbackup for Oracle 12c)
+- An Oracle listener (tnsnames) service name to connect to the database as sysdba (sysbackup for Oracle 12c)
+
+Create a database user account for Actifio backup (if not provided):
+sql> create user act_rman_user identified by <password>;
+e.g. SQL> create user act_rman_user identified by act_rman_user default tablespace users;
+
+Grant sysdba access. For Oracle 12c this role can be sysbackup instead of sysdba. For RAC, the grant must be run on all nodes.
+sql> grant create session, resource, sysdba to act_rman_user;
+
+Create a database user account for Actifio backup (if not provided):
+sql> create user act_rman_user identified by <password>;
+
+3. Grant sysdba access:
+sql> grant create session, resource, sysdba to act_rman_user;
+For Oracle 12c this role can be sysbackup instead of sysdba, and the database user name starts with #.
+ 
+4. Verify the sysdba role has been granted:
+```
+sqlplus / as sysasm
+select * from gv$pwfile_users;
+```
+
+
+
+##### Creating and Verifying the Oracle Servicename in a non-RAC Environment
+
+The Oracle Servicename is used for database authentication only.
+
+Example: Database name: dbstd, Instance Name: dbstd
+1. If the Oracle Servicename is not listed, then create the service name entry in the tnsnames.ora file at
+```
+$ORACLE_HOME/network/admin or at $GRID_HOME/network/admin by adding the entry:
+act_svc_dbstd =
+(DESCRIPTION =
+(ADDRESS = (PROTOCOL = TCP)(HOST = <IP of the database server>)(PORT = 1521))
+(CONNECT_DATA =
+(SERVER = DEDICATED)
+(SERVICE_NAME = dbstd)
+) )
+```
+
+If the tnsnames.ora file is in a non-standard location, then provide the absolute path to it in the Application Advanced Settings described in Application Advanced Settings for Oracle Databases on page 26.
+
+2. Test that the service name entry for the database is configured:
+Login as Oracle OS user and set the Oracle environment:
+```
+TNS_ADMIN=<tnsnames.ora file location>
+tnsping act_svc_dbstd
+
+
 For Oracle 12c this role can be sysbackup instead of sysdba:
 `grant create session, resource, sysbackup to c##act_rman_user; `
 
-Verify the sysdba role has been granted: 
+Check the database user account to be sure the Actifio backup can connect:
+`sqlplus act_rman_user/act_rman_user@act_svc_dbstd as sysdba`
+
+Verify the sysdba role has been granted. For RAC, verify the grant on all nodes.
 `select * from v$pwfile_users;`
 
 ##### BLOCK CHANGE TRACKING (optional)
+
+Recommend enabling database change block tracking. With database CBT off incremental backup time will be impacted. Oracle database block change tracking feature is available in oracle Enterprise Edition. SQL query to check block change tracking enabled/disabled: 
 
 Check if database block change tracking is enabled: 
 `select * from v$block_change_tracking;`
@@ -225,6 +282,20 @@ If it fails, then create a service name entry in **tnsnames.ora** . The file sho
 (SERVICE_NAME = <service_name>) 
 )
 )
+
+To test the service name, login as Oracle user and set the Oracle environment
+export TNS_ADMIN=$GRID_HOME/network/admin 
+tnsping <service_name>"
+
+Test the service name and user credentials. 
+
+For Oracle 12c this role can be sysbackup instead of sysdba:	
+sqlplus act_rman_user/act_rman_user@<service_name> as sysdba
+
+##### Creating a Servicename Entry in tnsnames.ora	
+Create the service name entry in the tnsnames.ora file at $ORACLE_HOME/network/admin or at $GRID_HOME/network/admin by adding the entry: 
+<service_name> = (DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = <IP of the database server>)(PORT = 1521)) (CONNECT_DATA = (SERVER = DEDICATED) (SERVICE_NAME = <service_name>)) )"
+
 ```
 
 Confirm that the TNS entry is working:

@@ -16,6 +16,19 @@ $ cd $ORACLE_HOME/OPatch
 $ ./opatch lsinventory -details
 ```
 
+#### Oracle Environment Variables
+If the variable ORAENV_ASK is changed to YES or is not set at all, there is a prompted to enter a SID when logging in.
+
+```
+export ORACLE_HOME=<oracle home path>
+export ORACLE_SID=<database instance name>
+export ORACLE_SID=orcl 
+export ORACLE_BASE=/u01/app/oracle
+export ORACLE_HOME=/u01/app/oracle/product/11.2.0/db_1
+export TNS_ADMIN=$ORACLE_HOME/network/admin      
+export PATH=$ORACLE_HOME/bin:$PATH
+```
+
 #### Ensure the database is up and running
 
 Each Oracle database to be protected must be up and running: 

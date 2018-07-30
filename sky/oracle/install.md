@@ -43,9 +43,11 @@ For a database named "prod", the entry looks like:    `prod:/home/oracle/app/ora
 
 
 
-##### Ensure ASM diskstring is not NULL
+### Ensure ASM diskstring is not NULL
 
-If you are using Oracle ASM protection out-of-band, then check that the ASM diskstring parameter is not null. Log into the ASM instance on the database server as ASM OS user and set the ASM environment variable:
+If you are using Oracle ASM protection out-of-band, then check that the ASM diskstring parameter is not null. 
+
+Log into the ASM instance on the database server as ASM OS user and set the ASM environment variable:
 ```
 sqlplus / as sysasm
 show parameter asm_diskstring
@@ -79,7 +81,7 @@ alter system set asm_diskstring='ORCL:*','/dev/actifio/asm/*' scope=both;
 startup
 ```
 
-##### Find out the running instance and environment variables
+### Find out the running instance and environment variables
 Log into the database server as Oracle OS user and set the database environment variable:
 ```
 export ORACLE_HOME=<oracle home path>        (get this from /etc/oratab or /var/opt/oracle/oratab on Solaris systems)
@@ -94,21 +96,18 @@ export ORAENV_ASK=NO
 . /usr/local/bin/oraenv
 ```
 
-Find out if ASM is running on the host:
-`ps –ef | grep asm_pmon`
+Find out if ASM is running on the host:     `ps –ef | grep asm_pmon`
 
-List the ASM diskgroups
-`oracleasm  listdisks  or  ls –l /dev/oracleasm/disks`
+List the ASM diskgroups            `oracleasm  listdisks  or  ls –l /dev/oracleasm/disks`
 
-##### Find out the running processes if capturing from RAC environment
+### Find out the running processes if capturing from RAC environment
 Find out the status of the ASM service
 ```
 srvctl status asm
 srvctl status service –d <racbigdb>
 ```
 
-Ensure all the services in the RAC is running fine:
-`crsctl status resource -t`
+Ensure all the services in the RAC is running fine:           `crsctl status resource -t`
 
 For an Oracle RAC configuration, make sure the snapshot controlfile is located under Shared Disks.  
 
@@ -119,7 +118,7 @@ RMAN> show all
 RMAN> configure snapshot controlfile name to ‘+<DG name><DB name>’
 ```
 
-##### Ensure the database is using SPFILE
+### Ensure the database is using SPFILE
 
 The location of text pfile is in $ORACLE_HOME/dbs/init{ORACLE_SID}.ora , whereas the encoded binary file is spfile{ORACLE_SID}.ora. To create a pfile from spfile, use the `create pfile from spfile`
 
@@ -141,7 +140,7 @@ sqlplus / as sysdba
 show parameter spfile
 ```
 
-##### Ensure the database is running in ARCHIVELOG mode
+### Ensure the database is running in ARCHIVELOG mode
 Verify database is running in archive mode: 
 `archive log list`
 
@@ -159,7 +158,7 @@ select incarnation#, resetlogs_time, resetlogs_change#, prior_resetlogs_change#,
 select name, created, resetlogs_change#, log_mode, open_resetlogs, open_mode, database_role, current_scn from v$database;
 ```
 
-#### Not required - Setting Flash Recovery Area
+### Not required - Setting Flash Recovery Area
 ```
 SQL> archive log list;
 SQL> startup mount
@@ -169,7 +168,7 @@ SQL> alter database archivelog;
 SQL> alter database open;
 ```
 
-##### DATABASE AUTHENTICATION, as opposed to OS AUTHENTICATION
+### DATABASE AUTHENTICATION, as opposed to OS AUTHENTICATION
 Create a database user account for Actifio backup (if not provided):
 `create user act_rman_user identified by <password>; `
 
@@ -204,9 +203,7 @@ sqlplus / as sysasm
 select * from gv$pwfile_users;
 ```
 
-
-
-##### Creating and Verifying the Oracle Servicename in a non-RAC Environment
+### Creating and Verifying the Oracle Servicename in a non-RAC Environment
 
 The Oracle Servicename is used for database authentication only.
 
@@ -240,13 +237,13 @@ Check the database user account to be sure the Actifio backup can connect:
 
 Verify the sysdba role has been granted. For RAC, verify the grant on all nodes.
 `select * from v$pwfile_users;`
+```
 
-##### BLOCK CHANGE TRACKING (optional)
+### BLOCK CHANGE TRACKING (optional)
 
 Recommend enabling database change block tracking. With database CBT off incremental backup time will be impacted. Oracle database block change tracking feature is available in oracle Enterprise Edition. SQL query to check block change tracking enabled/disabled: 
 
-Check if database block change tracking is enabled: 
-`select * from v$block_change_tracking;`
+Check if database block change tracking is enabled:     `select * from v$block_change_tracking;`
 
 ```
 set lines 120
@@ -264,7 +261,7 @@ For an Oracle instance running from ASM disk group:
 For an Oracle instance running from a file system:
 `alter database enable block change tracking using file '$ORACLE_HOME/dbs/<dbname>.bct';`
 
-##### ORACLE SERVICE NAME
+### ORACLE SERVICE NAME
 
 Find out the service name (<service_name>). Test the service name by running
 ```
@@ -272,11 +269,9 @@ tnsping <service_name>
 lnsrctl status
 ```
 
-The listener process must be up and running: 
-`ps –ef | grep tns`
+The listener process must be up and running:       `ps –ef | grep tns`
 
-If the listner is down:
-`su - oracle ; . oraenv ; lsnrctl status`
+If the listner is down:               `su - oracle ; . oraenv ; lsnrctl status`
 
 lsnrctl status to ensure the listener is running. If it's down, lsnrctl start will read the **$TNS_ADMIN/listener.ora** (under the grid or oracle user) and start the tnslsnr process. 
 
@@ -293,6 +288,7 @@ If it fails, then create a service name entry in **tnsnames.ora** . The file sho
 (SERVICE_NAME = <service_name>) 
 )
 )
+```
 
 To test the service name, login as Oracle user and set the Oracle environment
 export TNS_ADMIN=$GRID_HOME/network/admin 
@@ -303,7 +299,7 @@ Test the service name and user credentials.
 For Oracle 12c this role can be sysbackup instead of sysdba:	
 sqlplus act_rman_user/act_rman_user@<service_name> as sysdba
 
-##### Creating a Servicename Entry in tnsnames.ora	
+### Creating a Servicename Entry in tnsnames.ora	
 Create the service name entry in the tnsnames.ora file at $ORACLE_HOME/network/admin or at $GRID_HOME/network/admin by adding the entry: 
 ```
 <service_name> = (DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = <IP of the database server>)(PORT = 1521)) (CONNECT_DATA = (SERVER = DEDICATED) (SERVICE_NAME = <service_name>)) )"
@@ -314,7 +310,6 @@ Confirm that the TNS entry is working:
 tnsping <service_name>
 sqlplus act_rman_user/act_rman_user@<service_name> as sysdba
 ```
-
 - - -
 
 ```
@@ -373,7 +368,7 @@ select max(ora_rowscn), scn_to_timestamp(max(ora_rowscn)) from scott.emp;
 
 ```
 
-### Manual scripts
+## Manual scripts
 ```
 cd /act/act_scripts/oracleclone
 

@@ -1,14 +1,17 @@
-### Setting up Oracle Protection
+## Setting up Oracle Protection
 
 Prior to protecting an Oracle database using Actifio, we will need to:
 
-#### Patching Oracle 12c
+## Preparing for protection
 
-Actifio Application Aware mounts may fail if your Oracle 12c installation does not include this patch, which can be downloaded from the Oracle support portal: 
+### Patching Oracle 12c
+If we working with Oracle 12, ensure the software is patched with the following patches:
 `Oracle Database 12c Bug# 19404068 (ORA-1610 ON RECOVER DATABASE FOR CREATED CONTROLFILE)`
 • (Patch 19404068) Linux x86-64 for Oracle 12.1.0.2.0
 • (Patch 19404068) IBM AIX on POWER Systems (64-bit) for Oracle 12.1.0.2.0
 • (Patch 19404068) Solaris on SPARC (64-bit) for Oracle 12.1.0.2.0
+
+Actifio Application Aware mounts may fail if your Oracle 12c installation does not include the above patch, which can be downloaded from the Oracle support portal: 
 
 To see if the patch is installed, run:
 ```
@@ -16,9 +19,10 @@ $ cd $ORACLE_HOME/OPatch
 $ ./opatch lsinventory -details
 ```
 
-#### Oracle Environment Variables
-If the variable ORAENV_ASK is changed to YES or is not set at all, there is a prompted to enter a SID when logging in.
+### Oracle Environment Variables
+If the variable ORAENV_ASK is changed to YES or is not set at all, there is a prompted to enter a SID when logging in. Set it to NO to avoid this.
 
+Following is a list of Oracle related environment variables:
 ```
 export ORACLE_HOME=<oracle home path>
 export ORACLE_SID=<database instance name>
@@ -29,18 +33,15 @@ export TNS_ADMIN=$ORACLE_HOME/network/admin
 export PATH=$ORACLE_HOME/bin:$PATH
 ```
 
-#### Ensure the database is up and running
+### Ensure the Oracle database is up and running
 
-Each Oracle database to be protected must be up and running: 
-`ps –ef | grep pmon`
+Each Oracle database to be protected must be up and running:   `ps –ef | grep pmon`
 
 The Oracle database SID entry must be in the **/etc/oratab** (or, /var/opt/oracle/oratab) file.   
 
-For a database named “prod”, the entry looks like: 
-`prod:/home/oracle/app/oracle/product/11.1.0/db_1:Y`
+For a database named "prod", the entry looks like:    `prod:/home/oracle/app/oracle/product/11.1.0/db_1:Y`
 
 
-#### Preparing for protection
 
 ##### Ensure ASM diskstring is not NULL
 

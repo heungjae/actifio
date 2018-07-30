@@ -108,16 +108,22 @@ sqlplus / as sysdba
 show parameter spfile
 ```
 
-##### ARCHIVELOG
+##### Ensure the database is running in ARCHIVELOG mode
 Verify database is running in archive mode: 
 `archive log list`
 
-If the database is running noarchivelog mode and you need to change it archivelog:
+If the database is running noarchivelog mode and you will need to change it archivelog by connecting to the instance:
 ```
 shutdown immediate
 startup mount
 alter database archivelog;
 alter database open;
+```
+
+```
+set lines 120
+select incarnation#, resetlogs_time, resetlogs_change#, prior_resetlogs_change#, status from v$database_incarnation;
+select name, created, resetlogs_change#, log_mode, open_resetlogs, open_mode, database_role, current_scn from v$database;
 ```
 
 ##### DATABASE AUTHENTICATION, as opposed to OS AUTHENTICATION

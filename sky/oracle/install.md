@@ -158,6 +158,16 @@ select incarnation#, resetlogs_time, resetlogs_change#, prior_resetlogs_change#,
 select name, created, resetlogs_change#, log_mode, open_resetlogs, open_mode, database_role, current_scn from v$database;
 ```
 
+#### Not required - Setting Flash Recovery Area
+```
+SQL> archive log list;
+SQL> startup mount
+alter system set db_recovery_file_dest_size=10G scope=both
+alter system set db_recovery_file_dest='+data'
+SQL> alter database archivelog;
+SQL> alter database open;
+```
+
 ##### DATABASE AUTHENTICATION, as opposed to OS AUTHENTICATION
 Create a database user account for Actifio backup (if not provided):
 `create user act_rman_user identified by <password>; `

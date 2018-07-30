@@ -6,7 +6,7 @@ Actifio Global Manager (AGM) provides centralized management capabilities in a v
 #### AGM VM Requirements
 To deploy the AGM OVA without the AGM Catalog feature enabled, use VMware vSphere 6.5, 6.0, 5.5 or 5.1 Web Client with the following minimum system requirements:
 
-##### AGM Without Catalog Enabled
+##### _AGM Without Catalog Enabled_
 
 `Note: The deployment and installation of the AGM OVA using a standalone ESXi host is not supported.`  
 - Reserved 4 virtual CPUs*
@@ -19,7 +19,7 @@ To deploy the AGM OVA without the AGM Catalog feature enabled, use VMware vSpher
 `** Avoid sharing the datastore space with production load.`  
 
 
-##### AGM With Catalog Enabled
+##### _AGM With Catalog Enabled_
 To deploy the AGM OVA with AGM’s Catalog feature enabled, use the VMware vSphere 6.5, 6.0, 5.5 or 5.1 Web Client with the following system requirements:
 
 `Note: AGM with Catalog must be installed on ESX server that has vSphere/ESX 5.x or higher installed.`  

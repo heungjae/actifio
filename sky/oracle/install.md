@@ -19,6 +19,14 @@ $ cd $ORACLE_HOME/OPatch
 $ ./opatch lsinventory -details
 ```
 
+### Oracle Authentication
+We support OS and DB authentication.
+
+With OS authentication (default setting), Actifio passes OS username to the Oracle server, the username is recognized and the connection is accepted. There is no need for database user account (listener service) and Actifio backup operations use “/ as sysdba” to connect to database.   
+
+Actifio will use Oracle DB credentials to perform backup. We will need two kinds of Oracle credentials: 1) Database credentials to connect to the database with sysdba privilege, 2) An Oracle listener (tnsnames) service name to connect to the database as sysdba. This type of authentication is required in order to run parallel ASM disk group backups from multiple nodes in a RAC environment.  
+
+
 ### Oracle Environment Variables
 If the variable ORAENV_ASK is changed to YES or is not set at all, there is a prompted to enter a SID when logging in. Set it to NO to avoid this.
 ```
@@ -46,7 +54,6 @@ Each Oracle database to be protected must be up and running:   `ps –ef | grep 
 The Oracle database SID entry must be in the **/etc/oratab** (or, /var/opt/oracle/oratab) file.   
 
 For a database named "prod", the entry looks like:    `prod:/home/oracle/app/oracle/product/11.1.0/db_1:Y`
-
 
 
 ### Ensure ASM diskstring is not NULL
@@ -271,6 +278,13 @@ For an Oracle instance running from ASM disk group:
 
 For an Oracle instance running from a file system:
 `alter database enable block change tracking using file '$ORACLE_HOME/dbs/<dbname>.bct';`
+
+### Ensure password file exists
+Verify the password file for the database exists on the Oracle host
+
+### Ensure snapshot controlfile on shared disks
+For Oracle RAC configuration, make sure the snapshot controlfile is located under Shared Disks.
+
 
 ### ORACLE SERVICE NAME
 

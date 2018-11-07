@@ -21,8 +21,14 @@ $ ./opatch lsinventory -details
 
 ### Oracle Environment Variables
 If the variable ORAENV_ASK is changed to YES or is not set at all, there is a prompted to enter a SID when logging in. Set it to NO to avoid this.
+```
+export ORAENV_ASK=NO
+export ORACLE_SID=MYDB
+. oraenv
+export ORAENV_ASK=YES
+```
 
-Following is a list of Oracle related environment variables:
+Following is a list of standard Oracle related environment variables:
 ```
 export ORACLE_HOME=<oracle home path>
 export ORACLE_SID=<database instance name>
@@ -54,6 +60,7 @@ show parameter asm_diskstring
 ```
 If the result of value is null, then get the correct ASM disk string value for existing ASM disks before proceeding with Actifio protection. The Actifio backup will add its diskstring path (/dev/actifio/asm/*) for its backup staging disk to map to ASM. Add `ORCL:*` to asm_diskstring using the `alter system set asm_diskstring='ORCL:*' ;` command.
 
+Following are some SQL scripts to list the members of the ASM diskgroup:
 ```
 set lines 120
 col name for a30
@@ -217,14 +224,14 @@ Example: Database name: dbstd, Instance Name: dbstd
 $ORACLE_HOME/network/admin or at $GRID_HOME/network/admin by adding the entry:
 act_svc_dbstd =
 (DESCRIPTION =
-(ADDRESS = (PROTOCOL = TCP)(HOST = <IP of the database server>)(PORT = 1521))
-(CONNECT_DATA =
-(SERVER = DEDICATED)
-(SERVICE_NAME = dbstd)
+  (ADDRESS = (PROTOCOL = TCP)(HOST = <IP of the database server>)(PORT = 1521))
+    (CONNECT_DATA =
+    (SERVER = DEDICATED)
+    (SERVICE_NAME = dbstd)
 ) )
 ```
 
-If the tnsnames.ora file is in a non-standard location, then provide the absolute path to it in the Application Advanced Settings described in Application Advanced Settings for Oracle Databases on page 26.
+If the tnsnames.ora file is in a non-standard location, then provide the absolute path to it in the Application Advanced Settings.
 
 2. Test that the service name entry for the database is configured:
 Login as Oracle OS user and set the Oracle environment:
@@ -286,11 +293,11 @@ If it fails, then create a service name entry in **tnsnames.ora** . The file sho
 ```
 <service_name> =
 (DESCRIPTION =
-(ADDRESS = (PROTOCOL = TCP)(HOST = <IP address_Oracle server>)(PORT = 1521))
-(CONNECT_DATA =
-(SERVER = DEDICATED)
-(SERVICE_NAME = <service_name>) 
-)
+  (ADDRESS = (PROTOCOL = TCP)(HOST = <IP address_Oracle server>)(PORT = 1521))
+    (CONNECT_DATA =
+    (SERVER = DEDICATED)
+    (SERVICE_NAME = <service_name>) 
+  )
 )
 ```
 

@@ -30,6 +30,8 @@
 -----------------   
 - [ ] Verify the correct Actifio Sky License for data capacity is provided (5TB, 10TB, 30TB & 50TB)
 
-**Sky - Adding additional network interface **
+- - -
 
+**Sky - Adding additional network interface
+   
 Actifio Sky appliances that use 30 TB licenses and greater must use the VMXNET2 and VMXNET3 Ethernet adapters. These adapters enable 10GB performance. If Jumbo Frames are required, after the interface is added, click the NIC details tab and enable Jumbo Frames.

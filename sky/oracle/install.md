@@ -1,5 +1,26 @@
 ## Setting up Oracle Protection
 
+Actifio / Oracle - Prerequisites for capture:  
+
+- [ ] Actifio connector must be installed on DB host(s)
+- [ ] Confirm source database is up & running
+- [ ] Make sure that corresponding SID entry is updated in /etc/oratab with Oracle Home location
+- [ ] Confirm database is running in ARCHIVELOG mode
+- [ ] Confirm database is running with server parameter file (SPFILE)
+- [ ] For an Oracle RAC configuration, confirm the snapshot control file is located under shared disks
+- [ ] Enable Database Block Change Tracking (optional)
+- [ ] Database user (eg act_rman_user) should be created in source database if using “DB Authentication mode”.
+- [ ] Make sure that asm_diskstring is not empty. (If target/source DB host is running on ASM storage)
+
+
+Actifio / Oracle - Prerequisites for access:  
+
+- [ ] Actifio connector must be installed on DB host(s)
+- [ ] Make sure that /etc/oratab exists
+- [ ] Make sure that asm_diskstring is not empty. (If target/source DB host is running on ASM storage)
+
+
+
 Prior to protecting an Oracle database using Actifio, we will need to:
 
 ## Preparing for protection

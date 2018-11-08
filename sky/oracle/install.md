@@ -36,6 +36,7 @@ IQN |
 Database Name |
 Configuration |
 ORACLE_HOME |
+GRID_HOME |
 TNS_ADMIN |
 SID |
 Oracle version |

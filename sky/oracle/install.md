@@ -4,7 +4,9 @@
 
 - [ ] Actifio connector must be installed on DB host(s)
 - [ ] Confirm source database is up & running
-- [ ] Make sure that corresponding SID entry is updated in /etc/oratab with Oracle Home location
+- [ ] Make sure that corresponding SID entry is updated in /etc/oratab with ORACLE_HOME location
+- [ ] Confirm listener is up & running
+- [ ] Make sure that listener.ora exist in TNSADMIN_DIR location
 - [ ] Confirm database is running in ARCHIVELOG mode
 - [ ] Confirm database is running with server parameter file (SPFILE)
 - [ ] For an Oracle RAC configuration, confirm the snapshot control file is located under shared disks
@@ -16,9 +18,35 @@
 **Actifio / Oracle - Prerequisites for access:**   
 
 - [ ] Actifio connector must be installed on DB host(s)
-- [ ] Make sure that /etc/oratab exists
+- [ ] Confirm listener is up & running with listener.ora in TNSADMIN_DIR location
+- [ ] Make sure that /etc/oratab exists with ORACLE_HOME location
 - [ ] Make sure that asm_diskstring is not empty. (If target/source DB host is running on ASM storage)
    
+---
+
+**List of environmental information: **
+
+Component | Value
+------------ | -------------
+Hostname | 
+IP Address |
+OS type |
+Connector version |
+IQN |
+Database Name |
+Configuration |
+ORACLE_HOME |
+TNS_ADMIN |
+SID |
+Oracle version |
+BCT enabled | Yes/No
+Estd DB size |
+Estd DB chg rate |
+Capture on | FileSys/ASM
+asm_diskstring |
+DG primary svcname |
+No. RMAN channels
+
 ---
 
 Prior to protecting an Oracle database using Actifio, we will need to:

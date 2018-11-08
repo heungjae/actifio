@@ -1,6 +1,6 @@
 ## Setting up Oracle Protection
    
-** Actifio / Oracle - Prerequisites for capture:**   
+**Actifio / Oracle - Prerequisites for capture:**   
 
 - [ ] Actifio connector must be installed on DB host(s)
 - [ ] Confirm source database is up & running
@@ -13,7 +13,7 @@
 - [ ] Make sure that asm_diskstring is not empty. (If target/source DB host is running on ASM storage)
    
    
-** Actifio / Oracle - Prerequisites for access:**   
+**Actifio / Oracle - Prerequisites for access:**   
 
 - [ ] Actifio connector must be installed on DB host(s)
 - [ ] Make sure that /etc/oratab exists

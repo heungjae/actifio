@@ -34,4 +34,6 @@
 
 **Sky - Adding additional network interface**
    
+10GB Virtual NIC Upgrade. Remove the existing "E1000" adapter, and add a new "VMXNET 3" Adapter, and use the correct Port Group (VLAN) for where the Sky appliance will be able to be managed from. It's a good idea for this network to be the same subnet/VLAN/network as where the VMware ESXi hosts VMKernel ports are running.   
+   
 Actifio Sky appliances that use 30 TB licenses and greater must use the VMXNET2 and VMXNET3 Ethernet adapters. These adapters enable 10GB performance. If Jumbo Frames are required, after the interface is added, click the NIC details tab and enable Jumbo Frames.

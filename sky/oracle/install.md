@@ -13,7 +13,10 @@
 - [ ] Enable Database Block Change Tracking (optional)
 - [ ] Database user (eg act_rman_user) should be created in source database if using “DB Authentication mode”.
 - [ ] Make sure that asm_diskstring is not empty. (If target/source DB host is running on ASM storage)
-   
+- [ ] Ensure the firewall ports are open from DB server to Actifio appliance 
+- [ ]    nc -z -v <<sky-ip>> 3260 ; netstat -ano | grep 3260 ; netstat -ano | grep 5106
+- [ ] Ensure the Actifio appliance able to connect to DB server:   
+- [ ]    nc -z -v <<DB-ip>> 5106 ; netstat -ano | grep 3260 ; netstat -ano | grep 5106   
    
 **Actifio / Oracle - Prerequisites for access:**   
 

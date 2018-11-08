@@ -1,7 +1,7 @@
 ## Setting up Sky for POC
 
-
-**Sky - Prerequisites for POC:
+   
+**Sky - Prerequisites for POC:**
 	
 - [ ] Verify network ports are open for Actifio SKY communication and replication
 - [ ] Refer to PORT LIST tab in this document

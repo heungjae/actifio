@@ -20,8 +20,8 @@
 - [ ] On ESX, apply CPU (4), RAM (12GB) to Sky VM
 - [ ] On ESX, configure 3 VMDK's in independent persistent mode, thick-provisioned, eager 0.
 - [ ] 1 x 400 GB = Primary Pool (0:0 controller)
-- [ ] TBD TB   = Snapshot Pool (1:x controller)
-- [ ] TBD TB   = Dedup Pool (2:x controller) 
+- [ ] TBD TB (10GB min)  = Snapshot Pool (1:x controller)
+- [ ] TBD TB (1TB min)  = Dedup Pool (2:x controller) 
 - [ ] The controllers for the Actifio Snapshot Pool and Dedup Pool must be set to VMware Paravirtual.
 -----------------   
 - [ ] Deploy SKY - Power Up VM, open a browser and go to the installer page:  IP address/installer
@@ -29,3 +29,7 @@
 - [ ] Follow steps in Actifio SKY for VMware installation Guide
 -----------------   
 - [ ] Verify the correct Actifio Sky License for data capacity is provided (5TB, 10TB, 30TB & 50TB)
+
+**Sky - Adding additional network interface **
+
+Actifio Sky appliances that use 30 TB licenses and greater must use the VMXNET2 and VMXNET3 Ethernet adapters. These adapters enable 10GB performance. If Jumbo Frames are required, after the interface is added, click the NIC details tab and enable Jumbo Frames.

@@ -27,6 +27,37 @@
    
 ---
 
+**Database Information**
+
+- [ ] Check the database version and whether the configuration is supported by Actifio (10G R2, 11G R1-R2, 12c R1-R2).
+- [ ] Is it a stand-2. alone, RAC, Exadata, DataGuard, etc?
+- [ ] What is the SID / Servicename?
+- [ ] If Data Guard is in use, what is the Primary Node Servicename?
+- [ ] How is the current database being backed up? (third party product, RMAN, SAN snapshot)
+- [ ] Is the Database(s) configured with archive log mode
+- [ ] What is the current backup schedule window i.e. start time and the approximate time for completion?
+- [ ] If the database is using ASM, ensure the asm_diskstring is not set as NULL in the ASM instance via the following command:  show parameter asm_diskstring
+- [ ] Capture the list of names and values of the existing v$parameter in the target database, if it exists.
+- [ ] Find out the number of RMAN channels we can use for the capture.
+- [ ] If it's RAC, is there a preferred node(s) to run backups from?
+- [ ] If it's RAC with ASM, is the Snapshot control file located under shared disks?
+- [ ] Find out the running Oracle instance on the host: ps -ef | grep pmon | grep -v grep
+- [ ] Is Oracle DB running using spfile?
+- [ ] List out the contents of the /etc/oratab file.
+- [ ] List the value of the $ORACLE_HOME and $TNS_ADMIN environment variables
+- [ ] What is the directory location where the Oracle binary software is installed?
+- [ ] What is the directory location where tnsnames.ora is located?
+- [ ] Is an Enterprise Edition (EE) or Standard Edition (SE) licensing in use (or is there some other method i.e. Oracle Cloud, etc)?
+- [ ] If it's an EE licensing, is BCT (Block Change Tracking) enabled for the source database(s)?  SELECT status FROM v$block_change_tracking;
+- [ ] Is it preferable to use a database account (sysdba/sysbackup) or an OS User account to authenticate to RMAN for data capture?
+- [ ] If the Database is running on ASM, do you want to backup to a filesystem (ext3/4) or an ASM diskgroup?
+
+```
+Note: for Oracle version 10G, ensure that kfed is installed in ORACLE_HOME/bin for 10gR2
+```
+---
+
+
 **List of environmental information: **
 
 Component | Value

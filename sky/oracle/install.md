@@ -63,18 +63,19 @@ Note: for Oracle version 10G, ensure that kfed is installed in ORACLE_HOME/bin f
 - [ ] ps -ef | grep pmon    <- ora_pmon_actidb1
 - [ ] srvctl status database -d actidb  
 - [ ] cat $ORACLE_HOME/network/admin/tnsnames.ora  
-ACTIDB1 =
-(DESCRIPTION =
-  (ADDRESS = (PROTOCOL = TCP)(HOST = <IP address_Oracle server>)(PORT = 1521))
-    (CONNECT_DATA =
-    (SERVER = DEDICATED)
-    (SERVICE_NAME = actidb) 
-  )
-)
+ACTIDB1 =  
+(DESCRIPTION =  
+  (ADDRESS = (PROTOCOL = TCP)(HOST = <IP address_Oracle server>)(PORT = 1521))  
+    (CONNECT_DATA =  
+    (SERVER = DEDICATED)  
+    (SERVICE_NAME = actidb)  
+  )  
+)  
 - [ ] export ORACLE_SID=actidb1  
 - [ ] sqlplus / as sysdba  
 - [ ] select username from dba_users where username = 'ACT_RMAN_USER';    
-
+   
+   above user is granted with SYSDBA privilege
 ---
 
 **List of environmental information: **
